@@ -7,6 +7,10 @@ http://seattlerb.rubyforge.org/production_log_analyzer
 
 http://rubyforge.org/projects/seattlerb
 
+Bug reports:
+
+http://rubyforge.org/tracker/?func=add&group_id=1513&atid=5921
+
 == About
 
 production_log_analyzer provides three tools to analyze log files
@@ -14,9 +18,9 @@ created by SyslogLogger.  pl_analyze for getting daily reports,
 action_grep for pulling log lines for a single action and
 action_errors to summarize errors with counts.
 
-The analyzer requires the use of SyslogLogger from
-rails_analyzer_tools because the default Logger doesn't give any way
-to associate lines logged to a request.
+The analyzer currently requires the use of SyslogLogger because the
+default Logger doesn't give any way to associate lines logged to a
+request.
 
 The PL Analyzer also includes action_grep which lets you grab lines from a log
 that only match a single action.
@@ -25,40 +29,15 @@ that only match a single action.
 
 == Installing
 
-=== Download
+  sudo gem install production_log_analyzer
 
-Grab the gem (or tar.gz) from the RubyForge project:
+=== Setup
 
-http://rubyforge.org/frs/?group_id=586
+First:
 
-=== What you need
+Set up SyslogLogger according to the instructions here:
 
-Either:
-
-A syslogd that doesn't suck.  This means that syslog.conf(5) shows a
-!program_name specification.  (FreeBSD's syslogd doesn't suck, but OS X's
-syslogd does.)
-
-or:
-
-Some hacking skills to make Rails log the pid of the process for each line
-logged.  You'll also have to teach LogParser#parse about this.  Feel free to
-submit patches with tests.  (Patches without tests are useless to me.)
-
-=== What you need to do
-
-Either:
-
-Use SyslogLogger according to directions on the SyslogLogger RDoc page,
-including setting up your non-sucky syslogd as directed.  (SyslogLogger is
-included via the rails_analyzer_tools gem.)
-
-http://rails-analyzer.rubyforge.org/tools/classes/SyslogLogger.html
-
-or:
-
-Use your hacking skills and set up a logger that your hacked LogParser#parse
-can deal with.  (Then send my your patches for integration.)
+http://seattlerb.rubyforge.org/SyslogLogger/
 
 Then:
 
