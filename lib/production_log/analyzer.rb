@@ -113,6 +113,11 @@ end
 class Analyzer
 
   ##
+  # The version of the production log analyzer you are using.
+
+  VERSION = '1.5.0'
+
+  ##
   # The logfile being read by the Analyzer.
 
   attr_reader :logfile_name
