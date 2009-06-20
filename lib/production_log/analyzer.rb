@@ -161,8 +161,10 @@ class Analyzer
 
   def self.envelope(recipient, subject = nil) # :nodoc:
     envelope = {}
-    envelope['To'] = recipient
+
+    # HACK: this is a hack and the tests should be made order independent
     envelope['Subject'] = subject || "pl_analyze"
+    envelope['To'] = recipient
     envelope['Content-Type'] = "text/html"
 
     return envelope.map { |(k,v)| "#{k}: #{v}" }

@@ -71,6 +71,7 @@ module LogParser
     # same request.
 
     def parse(entry)
+      entry = entry.split(/\n/) if String === entry
       entry.each do |line|
         case line
         when /^Parameters/, /^Cookie set/, /^Rendering/,
