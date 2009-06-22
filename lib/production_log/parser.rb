@@ -150,7 +150,7 @@ module LogParser
       end
     end
 
-    buckets.each do |bucket, data|
+    buckets.sort.each do |bucket, data|
       yield LogEntry.new(data)
     end
   end

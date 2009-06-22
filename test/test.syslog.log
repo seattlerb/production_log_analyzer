@@ -1,4 +1,3 @@
-//src/production_log_analyzer/dev/test/test.syslog.log#1 - add change 3135 (text)
 Mar  7 00:00:00 online1 newsyslog[61307]: logfile turned over
 Mar  7 00:00:20 online1 rails[59600]: Goal Load (0.002112)   SELECT g.*, gs.score as score FROM goals g, goal_similarities gs WHERE g.id = gs.similar_goal_id AND g.num_active_people > 0 AND gs.goal_similarity_type_id = 1 AND gs.goal_id = 59133 ORDER BY score DESC LIMIT 3
 Mar  7 00:00:20 online1 rails[59600]: Tag Load (0.001527)   SELECT tags.*, count(*) as num_goals FROM tags_teams, tags, teams WHERE tags_teams.tag_id = tags.id AND tags_teams.team_id = teams.id AND teams.num_members > 0 AND teams.goal_id = 59133 GROUP BY tags.id ORDER BY num_goals DESC LIMIT 5
@@ -255,4 +254,3 @@ Mar  7 00:00:32 online1 rails[59635]: Processing PeopleController#progress (for 
 Mar  7 00:00:32 online1 rails[59635]: Parameters: {:id=>"swirlygirl", :on=>"35926", :action=>"progress", :"people/progress/swirlygirl/35926.html/progress/swirlygirl/35926"=>nil, :controller=>"people"}
 Mar  7 00:00:32 online1 rails[59635]: Browser Load (0.000698)   SELECT * FROM browsers WHERE ubid = 'STUFF' LIMIT 1
 Mar  7 00:00:32 online1 rails[59635]: Person Load (0.001319)   SELECT * FROM people WHERE username = 'swirlygirl' LIMIT 1
-

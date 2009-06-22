@@ -91,18 +91,18 @@ class TestAnalyzer < Test::Unit::TestCase
     email = Analyzer.email('test/test.syslog.log', 'devnull@robotcoop.com',
                            nil, 1)
     expected = <<-EOF
+Content-Type: text/html
 Subject: pl_analyze
 To: devnull@robotcoop.com
-Content-Type: text/html
 
 <pre>Request Times Summary:    	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.576	0.508	0.000	1.470
 
 ThingsController#view:    	3	0.716	0.387	0.396	1.260
-TeamsController#progress: 	2	0.841	0.629	0.212	1.470
-RssController#uber:       	2	0.035	0.000	0.035	0.035
 PeopleController#progress:	2	0.489	0.489	0.000	0.977
 PeopleController#view:    	2	0.731	0.371	0.360	1.102
+RssController#uber:       	2	0.035	0.000	0.035	0.035
+TeamsController#progress: 	2	0.841	0.629	0.212	1.470
 
 Slowest Request Times:
 \tTeamsController#progress took 1.470s
@@ -113,10 +113,10 @@ DB Times Summary:         	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.366	0.393	0.000	1.144
 
 ThingsController#view:    	3	0.403	0.362	0.122	0.914
-TeamsController#progress: 	2	0.646	0.497	0.149	1.144
-RssController#uber:       	2	0.008	0.000	0.008	0.008
 PeopleController#progress:	2	0.415	0.415	0.000	0.830
 PeopleController#view:    	2	0.338	0.149	0.189	0.486
+RssController#uber:       	2	0.008	0.000	0.008	0.008
+TeamsController#progress: 	2	0.646	0.497	0.149	1.144
 
 Slowest Total DB Times:
 \tTeamsController#progress took 1.144s
@@ -127,10 +127,10 @@ Render Times Summary:     	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.219	0.253	0.000	0.695
 
 ThingsController#view:    	3	0.270	0.171	0.108	0.506
-TeamsController#progress: 	2	0.000	0.000	0.000	0.000
-RssController#uber:       	2	0.012	0.000	0.012	0.012
 PeopleController#progress:	2	0.302	0.302	0.000	0.604
 PeopleController#view:    	2	0.487	0.209	0.278	0.695
+RssController#uber:       	2	0.012	0.000	0.012	0.012
+TeamsController#progress: 	2	0.000	0.000	0.000	0.000
 
 Slowest Total Render Times:
 \tPeopleController#view took 0.695s
@@ -142,9 +142,9 @@ Slowest Total Render Times:
 
   def test_self_envelope
     expected = [
+      "Content-Type: text/html",
       "Subject: pl_analyze",
       "To: devnull@example.com",
-      "Content-Type: text/html"
     ]
 
     assert_equal expected, Analyzer.envelope('devnull@example.com')
@@ -152,9 +152,9 @@ Slowest Total Render Times:
 
   def test_self_envelope_subject
     expected = [
+      "Content-Type: text/html",
       "Subject: happy fancy boom",
       "To: devnull@example.com",
-      "Content-Type: text/html"
     ]
 
     assert_equal(expected,
@@ -183,10 +183,10 @@ DB Times Summary:         	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.366	0.393	0.000	1.144
 
 ThingsController#view:    	3	0.403	0.362	0.122	0.914
-TeamsController#progress: 	2	0.646	0.497	0.149	1.144
-RssController#uber:       	2	0.008	0.000	0.008	0.008
 PeopleController#progress:	2	0.415	0.415	0.000	0.830
 PeopleController#view:    	2	0.338	0.149	0.189	0.486
+RssController#uber:       	2	0.008	0.000	0.008	0.008
+TeamsController#progress: 	2	0.646	0.497	0.149	1.144
 EOF
 
     assert_equal expected, @analyzer.db_times_summary
@@ -282,10 +282,10 @@ Render Times Summary:     	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.219	0.253	0.000	0.695
 
 ThingsController#view:    	3	0.270	0.171	0.108	0.506
-TeamsController#progress: 	2	0.000	0.000	0.000	0.000
-RssController#uber:       	2	0.012	0.000	0.012	0.012
 PeopleController#progress:	2	0.302	0.302	0.000	0.604
 PeopleController#view:    	2	0.487	0.209	0.278	0.695
+RssController#uber:       	2	0.012	0.000	0.012	0.012
+TeamsController#progress: 	2	0.000	0.000	0.000	0.000
 EOF
 
     assert_equal expected, @analyzer.render_times_summary
@@ -297,10 +297,10 @@ Request Times Summary:    	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.576	0.508	0.000	1.470
 
 ThingsController#view:    	3	0.716	0.387	0.396	1.260
-TeamsController#progress: 	2	0.841	0.629	0.212	1.470
-RssController#uber:       	2	0.035	0.000	0.035	0.035
 PeopleController#progress:	2	0.489	0.489	0.000	0.977
 PeopleController#view:    	2	0.731	0.371	0.360	1.102
+RssController#uber:       	2	0.035	0.000	0.035	0.035
+TeamsController#progress: 	2	0.841	0.629	0.212	1.470
 
 Slowest Request Times:
 \tTeamsController#progress took 1.470s
@@ -320,10 +320,10 @@ DB Times Summary:         	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.366	0.393	0.000	1.144
 
 ThingsController#view:    	3	0.403	0.362	0.122	0.914
-TeamsController#progress: 	2	0.646	0.497	0.149	1.144
-RssController#uber:       	2	0.008	0.000	0.008	0.008
 PeopleController#progress:	2	0.415	0.415	0.000	0.830
 PeopleController#view:    	2	0.338	0.149	0.189	0.486
+RssController#uber:       	2	0.008	0.000	0.008	0.008
+TeamsController#progress: 	2	0.646	0.497	0.149	1.144
 
 Slowest Total DB Times:
 \tTeamsController#progress took 1.144s
@@ -343,10 +343,10 @@ Render Times Summary:     	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.219	0.253	0.000	0.695
 
 ThingsController#view:    	3	0.270	0.171	0.108	0.506
-TeamsController#progress: 	2	0.000	0.000	0.000	0.000
-RssController#uber:       	2	0.012	0.000	0.012	0.012
 PeopleController#progress:	2	0.302	0.302	0.000	0.604
 PeopleController#view:    	2	0.487	0.209	0.278	0.695
+RssController#uber:       	2	0.012	0.000	0.012	0.012
+TeamsController#progress: 	2	0.000	0.000	0.000	0.000
 
 Slowest Total Render Times:
 \tPeopleController#view took 0.695s
@@ -374,10 +374,10 @@ Request Times Summary:    	Count	Avg	Std Dev	Min	Max
 ALL REQUESTS:             	11	0.576	0.508	0.000	1.470
 
 ThingsController#view:    	3	0.716	0.387	0.396	1.260
-TeamsController#progress: 	2	0.841	0.629	0.212	1.470
-RssController#uber:       	2	0.035	0.000	0.035	0.035
 PeopleController#progress:	2	0.489	0.489	0.000	0.977
 PeopleController#view:    	2	0.731	0.371	0.360	1.102
+RssController#uber:       	2	0.035	0.000	0.035	0.035
+TeamsController#progress: 	2	0.841	0.629	0.212	1.470
 EOF
 
     assert_equal expected, @analyzer.request_times_summary

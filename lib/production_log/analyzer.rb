@@ -95,7 +95,7 @@ class SlowestTimes < SizedList
 
   def initialize(limit)
     super limit do |arr, new_item|
-      fastest_time = arr.sort_by { |time, name| time }.first
+      fastest_time = arr.sort_by { |time, name| [time, name] }.first
       if fastest_time.first < new_item.first then
         arr.delete_at index(fastest_time)
         true
@@ -167,7 +167,7 @@ class Analyzer
     envelope['To'] = recipient
     envelope['Content-Type'] = "text/html"
 
-    return envelope.map { |(k,v)| "#{k}: #{v}" }
+    envelope.sort.map { |(k,v)| "#{k}: #{v}" }
   end
 
   ##
@@ -330,16 +330,19 @@ class Analyzer
     list << record.join("\t")
 
     # all requests
-    times = records.values.flatten
-    record = [times.average, times.standard_deviation, times.min, times.max]
+    all_times = records.values.flatten
+    record = [
+      all_times.average, all_times.standard_deviation, all_times.min,
+      all_times.max
+    ]
     record.map! { |v| "%0.3f" % v }
-    record.unshift [pad_request_name('ALL REQUESTS'), times.size]
+    record.unshift [pad_request_name('ALL REQUESTS'), all_times.size]
     list << record.join("\t")
 
     # spacer
     list << nil
 
-    records.sort_by { |k,v| v.size}.reverse_each do |req, times|
+    records.sort_by { |k,v| [-v.size, k] }.each do |req, times|
       record = [times.average, times.standard_deviation, times.min, times.max]
       record.map! { |v| "%0.3f" % v }
       record.unshift ["#{pad_request_name req}", times.size]
@@ -358,7 +361,7 @@ class Analyzer
       end
     end
 
-    return slowest_times.sort_by { |time, name| time }.reverse
+    return slowest_times.sort_by { |time, name| [-time, name] }
   end
 
   def time_average(records) # :nodoc:

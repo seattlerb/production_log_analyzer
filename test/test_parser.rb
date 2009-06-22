@@ -222,8 +222,8 @@ Jan 03 12:24:24 duo2 rails[4277]: Completed in 0.00112 (896 reqs/sec) | DB: 0.00
 
   def test_class_parse_multi
     entries = []
-    File.open 'test/test.syslog.log' do |fp|
-      LogParser.parse fp do |entry|
+    open 'test/test.syslog.log' do |io|
+      LogParser.parse io do |entry|
         entries << entry
       end
     end
@@ -235,15 +235,18 @@ Jan 03 12:24:24 duo2 rails[4277]: Completed in 0.00112 (896 reqs/sec) | DB: 0.00
     assert_equal 'TeamsController#progress', redirect.page
     assert_equal 0, redirect.render_time
 
+    second_last = entries[-2]
+    assert_equal 'PeopleController#progress', second_last.page
+    assert_equal 0, second_last.request_time
+
     last = entries.last
-    assert_equal 'PeopleController#progress', last.page
-    assert_equal 0, last.request_time
+    assert_equal nil, last.page
   end
 
   def test_class_parse_0_14_x
     entries = []
-    File.open 'test/test.syslog.0.14.x.log' do |fp|
-      LogParser.parse fp do |entry|
+    open 'test/test.syslog.0.14.x.log' do |io|
+      LogParser.parse io do |entry|
         entries << entry
       end
     end
