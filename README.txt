@@ -1,11 +1,12 @@
 = production_log_analyzer
 
+* http://seattlerb.rubyforge.org/production_log_analyzer
+* http://rubyforge.org/projects/seattlerb
+
+== DESCRIPTION
+
 production_log_analyzer lets you find out which actions on a Rails
 site are slowing you down.
-
-http://seattlerb.rubyforge.org/production_log_analyzer
-
-http://rubyforge.org/projects/seattlerb
 
 Bug reports:
 
