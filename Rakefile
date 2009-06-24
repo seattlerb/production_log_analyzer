@@ -3,7 +3,7 @@ ENV.delete 'GEM_PATH'
 require 'rubygems'
 require 'hoe'
 
-Hoe.plugin :seattlerb
+Hoe.plugin :email, :perforce # not on minitest yet
 
 Hoe.spec 'production_log_analyzer' do
   developer 'Eric Hodel', 'drbrain@segment7.net'
@@ -12,4 +12,3 @@ Hoe.spec 'production_log_analyzer' do
 
   extra_deps << ['rails_analyzer_tools', '>= 1.4.0']
 end
-
