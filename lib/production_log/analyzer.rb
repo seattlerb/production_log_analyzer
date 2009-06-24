@@ -115,7 +115,7 @@ class Analyzer
   ##
   # The version of the production log analyzer you are using.
 
-  VERSION = '1.5.0'
+  VERSION = '1.5.1'
 
   ##
   # The logfile being read by the Analyzer.
