@@ -3,6 +3,8 @@ ENV.delete 'GEM_PATH'
 require 'rubygems'
 require 'hoe'
 
+Hoe.plugin :seattlerb
+
 Hoe.spec 'production_log_analyzer' do
   developer 'Eric Hodel', 'drbrain@segment7.net'
 
